@@ -9,10 +9,13 @@ const psql = require('./modules/postgres')
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
+
 app.use( async (req, res, next) =>{
   req.psql = await psql
   next()
 })
+
+app.use('/uploads', express.static(path.join(__dirname, "uploads")))
   
 app.use(cors())
 
