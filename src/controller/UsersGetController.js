@@ -4,7 +4,6 @@ module.exports = async (req, res) =>{
   })
   users = await users.map(e => e.dataValues
   )
-  console.log(users);
   res.status(200).json({
     ok: true,
     data: users

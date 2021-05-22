@@ -13,7 +13,7 @@ app.use( async (req, res, next) =>{
   req.psql = await psql
   next()
 })
-
+  
 app.use(cors())
 
 app.listen(8010, () => console.log(`Ready at ${8010}`))

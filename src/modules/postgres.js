@@ -1,4 +1,5 @@
 const {Sequelize, DataTypes} = require('sequelize')
+const AdminModel = require('../models/AdminModel')
 const SessionModel = require('../models/SessionModel')
 const UserModel = require('../models/UserModel')
 
@@ -12,12 +13,21 @@ async function postgres() {
     let db = {}
     db.users = UserModel(Sequelize, sequelize)
     db.sessions = await SessionModel(Sequelize, sequelize)
+    db.admins = await AdminModel(Sequelize, sequelize)
     await db.users.hasMany(db.sessions, {
       foreignKey: {
         name: 'user_id',
         allowNull: false
       }
     })
+
+    await db.users.hasOne(db.admins, {
+      foreignKey: {
+        name: 'user_id',
+        allowNull: false
+      }
+    })
+
     // let user = await db.users.create({name: 'John', password: 'salom'})
     // console.log(user);
     // sequelize.sync({force:true})
